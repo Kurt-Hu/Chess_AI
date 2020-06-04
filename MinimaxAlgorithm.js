@@ -55,13 +55,14 @@ function maximize(board, depth) {
 }
 
 function minimizeAlphaBeta(board, alpha, beta, depth) {
-  if (depth >= visionDepth || board.gameResult != '') {
-    return board.updateEvaluation();
+  let eval = board.updateEvaluation();
+  if (depth >= visionDepth) {
+    return eval;
   }
 
   let futureBoards = board.generateAllPossibleBoards(false);
   let tempScore;
-  let lowestScore = 100000; //arbitrarily high, so the lowest score will be lower
+  let lowestScore = 1000; //arbitrarily high, so the lowest score will be lower
   let lowestBoardIndex = 0;
 
   for (let i = 0; i < futureBoards.length; i++) {
@@ -86,21 +87,30 @@ function minimizeAlphaBeta(board, alpha, beta, depth) {
   }
 
   if (depth == 0) {
-    return futureBoards[lowestBoardIndex];
+    if (futureBoards.length > 0) {
+      return futureBoards[lowestBoardIndex];
+    } else {
+      print('baddd')
+      return null;
+    }
   }
-
   return lowestScore;
 }
 
 
 function maximizeAlphaBeta(board, alpha, beta, depth) {
-  if (depth >= visionDepth || board.gameResult != '') {
-    return board.updateEvaluation();
+  let eval = board.updateEvaluation();
+  if (depth >= visionDepth) {
+    return eval;
   }
 
   let futureBoards = board.generateAllPossibleBoards(true);
   let tempScore;
-  let highestScore = -100000; //arbitrarily low, so the highest score will be higher
+
+  //By the way, this breaks if it is less than alpha, so be careful
+  let highestScore = -1000; //arbitrarily low, so the highest score will be higher
+
+
   let highestBoardIndex = 0;
 
   for (let i = 0; i < futureBoards.length; i++) {
@@ -125,7 +135,12 @@ function maximizeAlphaBeta(board, alpha, beta, depth) {
   }
 
   if (depth == 0) {
-    return futureBoards[highestBoardIndex];
+    if (futureBoards.length > 0) {
+      return futureBoards[highestBoardIndex];
+    } else {
+      print('badd')
+      return null;
+    }
   }
 
   return highestScore;

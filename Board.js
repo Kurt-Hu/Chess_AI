@@ -64,6 +64,15 @@ class Board {
   }
 
   updateEvaluation() {
+    if (this.isBeingChecked(!this.isWhiteTurn)) {
+      //TODO: Checkmate
+      // print("Checkmate");
+      if (this.generateAllPossibleBoards(this.isWhiteTurn).length == 0) {
+
+        this.gameResult = "checkmate";
+      }
+    }
+
     if (this.gameResult == "checkmate") {
       if (this.isWhiteTurn) {
         this.evaluation = -999;

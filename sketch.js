@@ -56,7 +56,7 @@ function AI_Turn() {
       if (moveDelayFramesWhite > 10) {
         print("white AI moving")
         print("Evaluation: " + initialBoard.updateEvaluation());
-        initialBoard = maximizeAlphaBeta(initialBoard, -999, 999, 0);
+        initialBoard = maximizeAlphaBeta(initialBoard, -2000, 2000, 0);
         moveDelayFramesWhite = 0;
         isGameOver(initialBoard, initialBoard.isWhiteTurn);
       } else {
@@ -66,7 +66,7 @@ function AI_Turn() {
       if (moveDelayFramesBlack > 10) {
         print("black AI moving")
         print("Evaluation: " + initialBoard.updateEvaluation());
-        initialBoard = minimizeAlphaBeta(initialBoard, -999, 999, 0);
+        initialBoard = minimizeAlphaBeta(initialBoard, -2000, 2000, 0);
         moveDelayFramesBlack = 0;
         isGameOver(initialBoard, initialBoard.isWhiteTurn);
       } else {
@@ -98,6 +98,11 @@ function doMove(piece, board, x, y) {
 }
 
 function isGameOver(board, checkWhiteWin) {
+  if (!(board instanceof Board)) {
+    print("this is bad")
+    return;
+  }
+  print(board)
   if (board.generateAllPossibleBoards(board.isWhiteTurn).length == 0) {
     if (board.isBeingChecked(checkWhiteWin)) {
       //TODO: Checkmate
