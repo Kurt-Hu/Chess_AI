@@ -102,7 +102,6 @@ function isGameOver(board, checkWhiteWin) {
     print("this is bad")
     return;
   }
-  print(board)
   if (board.generateAllPossibleBoards(board.isWhiteTurn).length == 0) {
     if (board.isBeingChecked(checkWhiteWin)) {
       //TODO: Checkmate
