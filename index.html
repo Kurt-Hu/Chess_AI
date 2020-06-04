@@ -10,12 +10,95 @@
       padding: 0;
       margin: 0;
     }
+    /* Dropdown Button */
+    .dropbtn {
+      background-color: #3498DB;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Dropdown button on hover & focus */
+    .dropbtn:hover, .dropbtn:focus {
+      background-color: #2980B9;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+      position: static;
+      /* display: inline-block; */
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {background-color: #ddd}
+
+    /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+    .show {display:block;}
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    .column {
+      float: left;
+      margin-right: 1em;
+    }
   </style>
+
   <script src="./libraries/p5.js"></script>
   <script src="./libraries/p5.sound.min.js"></script>
   <script src="sketch.js"></script>
   <script src="Board.js"></script>
   <script src="Piece.js"></script>
+  <script src="MinimaxAlgorithm.js"></script>
+
+  <div class="row">
+    <div class="column">
+      <div class="dropdown">
+        <button onclick="optionsDropdown()" class="dropbtn" id="optionsBtn">No AI</button>
+        <div id="optionsDropdown" class="dropdown-content">
+          <a onClick="noAIClick()">No AI</a>
+          <a onClick="blackAIClick()">Black AI</a>
+          <a onClick="whiteAIClick()">White AI</a>
+          <a onClick="bothAIClick()">Both AI</a>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="dropdown">
+        <button onclick="difficultyDropdown()" class="dropbtn" id="difficultyBtn">Looking 3 Moves Ahead</button>
+        <div id="difficultyDropdown" class="dropdown-content">
+          <a onClick="oneMoveAheadClick()">Looking 1 Move Ahead</a>
+          <a onClick="twoMovesAheadClick()">Looking 2 Moves Ahead</a>
+          <a onClick="threeMovesAheadClick()">Looking 3 Moves Ahead</a>
+          <a onClick="fourMovesAheadClick()">Looking 4 Moves Ahead</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </head>
 
 <body>
